@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Calculadora de IMC</title>
+</head>
+<body>
+  <h2>Calculadora de IMC (Índice de Masa Corporal)</h2>
+
+  <form onsubmit="calcularIMC(event)">
+    <label>Peso (kg):</label><br>
+    <input type="number" id="peso" step="0.1" required><br><br>
+
+    <label>Altura (m):</label><br>
+    <input type="number" id="altura" step="0.01" required><br><br>
+
+    <button type="submit">Calcular IMC</button>
+  </form>
+
+  <p id="resultado"></p>
+
+  <script>
+    function calcularIMC(e) {
+      e.preventDefault();
+
+      const peso = parseFloat(document.getElementById("peso").value);
+      const altura = parseFloat(document.getElementById("altura").value);
+
+      if (isNaN(peso) || isNaN(altura) || altura <= 0) {
+        document.getElementById("resultado").textContent = "Por favor ingrese valores válidos.";
+        return;
+      }
+
+      const imc = peso / (altura * altura);
+      let interpretacion = "";
+
+      if (imc < 18.5) {
+        interpretacion = "Peso bajo :(";
+      } else if (imc < 25) {
+        interpretacion = "Peso Ideal!";
+      } else if (imc < 30) {
+        interpretacion = "Sobrepeso";
+      } else {
+        interpretacion = "Obesidad";
+      }
+
+      document.getElementById("resultado").textContent = 
+        `Tu IMC es: ${imc.toFixed(2)} → ${interpretacion}`;
+    }
+  </script>
+</body>
+</html>

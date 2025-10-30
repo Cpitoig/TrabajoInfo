@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Ejercicios de JavaScript</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h2>1. Contador que disminuye</h2>
+<p id="contador">10</p>
+<button onclick="disminuir()">Disminuir</button>
+<script>
+    let contador = 10;
+    function disminuir() {
+      if (contador > 0) {
+        contador--;
+        document.getElementById('contador').textContent = contador;
+      } else {
+        alert("El contador ya está en 0.");
+      }
+    }
+    </script>
+    </body>

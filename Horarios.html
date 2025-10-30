@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Calculador de días para un evento</title>
+</head>
+<body>
+  <h2>Calculador de días para un evento</h2>
+  <form onsubmit="calcularDias(event)">
+    <label>Nombre del evento:</label><br>
+    <input type="text" id="evento" required><br><br>
+
+    <label>Fecha del evento:</label><br>
+    <input type="date" id="fechaEvento" required><br><br>
+
+    <button type="submit">Calcular</button>
+  </form>
+
+  <p id="resultado"></p>
+
+  <script>
+    function calcularDias(e) {
+      e.preventDefault();
+
+      const nombre = document.getElementById("evento").value.trim();
+      const fechaIngresada = new Date(document.getElementById("fechaEvento").value);
+      const hoy = new Date();
+
+      hoy.setHours(0, 0, 0, 0);
+      fechaIngresada.setHours(0, 0, 0, 0);
+
+      const diferencia = fechaIngresada - hoy;
+      const dias = Math.ceil(diferencia / (1000 * 60 * 60 * 24));
+
+      let mensaje = "";
+
+      if (dias > 0) {
+        mensaje = `Faltan ${dias} días para el evento "${nombre}".`;
+      } else if (dias === 0) {
+        mensaje = `¡El evento "${nombre}" es hoy, bobi!`;
+      } else {
+        mensaje = `El evento "${nombre}" ya pasó.`;
+      }
+
+      document.getElementById("resultado").textContent = mensaje;
+    }
+  </script>
+</body>
+</html>
